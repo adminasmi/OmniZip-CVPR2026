@@ -141,17 +141,6 @@ print('✓ All modules working')
 "
 ```
 
-## 📈 Performance
-
-| Modality | Bits/Unit | Compression Ratio |
-|-----------|------------|------------------|
-| Text | 2.5-3.5 bits/char | ~3:1 |
-| Image | 0.8-1.2 bits/pixel | ~8:1 |
-| Speech | 1.5-2.5 bits/sample | ~4:1 |
-| Medical | 1.0-1.8 bits/pixel | ~6:1 |
-| Gene | 1.8-2.8 bits/base | ~3:1 |
-| Database | 2.0-3.0 bits/char | ~2.5:1 |
-
 ## 🛠 Troubleshooting
 
 **Module Import Error**:
