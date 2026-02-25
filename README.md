@@ -157,4 +157,4 @@ cd aclibs && bash build.sh
 
 ---
 
-**CVPR 2026 Submission** | **MIT License**
+**CVPR 2026 Reference** | 
