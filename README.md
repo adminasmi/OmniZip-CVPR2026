@@ -110,6 +110,7 @@ python decompress.py \
 | `--use_ac` | flag | Use arithmetic coding vs cross-entropy |
 | `--amp` | flag | Mixed precision training |
 | `--accupdate` | flag | Gradient accumulation |
+| `--debug` | flag | Debug mode for quick checking |
 
 ## 🧠 Model Architecture
 

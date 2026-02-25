@@ -23,36 +23,108 @@ CORPUS_ROOT = f'/home/zhaoy/OmniZip-CVPR2026/corpus/{UNK_TYPE}'
 
 DATASETS = {
     # ===== Image =====
-    'kodak': {'mod': 'image', 'train': f'{DATA_ROOT}/image/Kodak/Images', 'test': f'{DATA_ROOT}/image/Kodak/Images'},
-    'clic-pro': {'mod': 'image', 'train': f'{DATA_ROOT}/image/clic/professional/valid', 'test': f'{DATA_ROOT}/image/clic/professional/valid'},
-    'clic-mobile': {'mod': 'image', 'train': f'{DATA_ROOT}/image/clic/mobile/valid', 'test': f'{DATA_ROOT}/image/clic/mobile/valid'},
-    'div2k': {'mod': 'image', 'train': f'{DATA_ROOT}/image/DIV2K/valid', 'test': f'{DATA_ROOT}/image/DIV2K/valid'},
+    'kodak': {
+        'mod': 'image', 
+        'train': None, 
+        'test': f'{DATA_ROOT}/image/Kodak/Images'
+    },
+    'clic-pro': {
+        'mod': 'image', 
+        'train': f'{DATA_ROOT}/image/clic/professional/train', 
+        'test': f'{DATA_ROOT}/image/clic/professional/valid'
+    },
+    'clic-mobile': {
+        'mod': 'image', 
+        'train': f'{DATA_ROOT}/image/clic/mobile/train', 
+        'test': f'{DATA_ROOT}/image/clic/mobile/valid'
+    },
+    'div2k': {
+        'mod': 'image', 
+        'train': f'{DATA_ROOT}/image/DIV2K/train', 
+        'test': f'{DATA_ROOT}/image/DIV2K/valid'
+    },
 
     # ===== Medical =====
-    'axial': {'mod': 'medical', 'train': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/axial', 'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/axial'},
-    'coronal': {'mod': 'medical', 'train': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/coronal', 'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/coronal'},
-    'sagittal': {'mod': 'medical', 'train': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/sagittal', 'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/sagittal'},
-    'mosmeddata': {'mod': 'medical', 'train': f'{DATA_ROOT}/medical/MosMedData/studies/CT-2', 'test': f'{DATA_ROOT}/medical/MosMedData/studies/CT-3'},
+    'axial': {
+        'mod': 'medical', 
+        'train': f'{DATA_ROOT}/medical/MRNet-v1.0/train/axial', 
+        'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/axial'
+    },
+    'coronal': {
+        'mod': 'medical', 
+        'train': f'{DATA_ROOT}/medical/MRNet-v1.0/train/coronal', 
+        'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/coronal'
+    },
+    'sagittal': {
+        'mod': 'medical', 
+        'train': f'{DATA_ROOT}/medical/MRNet-v1.0/train/sagittal', 
+        'test': f'{DATA_ROOT}/medical/MRNet-v1.0/valid/sagittal'
+    },
+    'mosmeddata': {
+        'mod': 'medical', 
+        'train': f'{DATA_ROOT}/medical/MosMedData/studies/CT-2', 
+        'test': f'{DATA_ROOT}/medical/MosMedData/studies/CT-3'
+    },
 
     # ===== Tactile =====
-    'touchandgo': {'mod': 'tactile', 'train': f'{DATA_ROOT}/touch/TouchandGoDataset-v2/dataset-comp/test/image', 'test': f'{DATA_ROOT}/touch/TouchandGoDataset-v2/dataset-comp/test/image'},
-    'objectfolder': {'mod': 'tactile', 'train': f'{DATA_ROOT}/touch/ObjectFolder_1.0/dataset-comp/test/image', 'test': f'{DATA_ROOT}/touch/ObjectFolder_1.0/dataset-comp/test/image'},
+    'touchandgo': {
+        'mod': 'tactile', 
+        'train': f'{DATA_ROOT}/touch/TouchandGoDataset-v2/dataset-comp/train/image', 
+        'test': f'{DATA_ROOT}/touch/TouchandGoDataset-v2/dataset-comp/test/image'
+    },
+    'objectfolder': {
+        'mod': 'tactile', 
+        'train': f'{DATA_ROOT}/touch/ObjectFolder_1.0/dataset-comp/train/image', 
+        'test': f'{DATA_ROOT}/touch/ObjectFolder_1.0/dataset-comp/test/image'
+    },
 
     # ===== Text =====
-    'enwik8': {'mod': 'text', 'train': {'raw': f'{DATA_ROOT}/text/enwik8', 'corpus': f'{CORPUS_ROOT}/spm_enwik8_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': None},
-    'enwik9': {'mod': 'text', 'train': {'raw': f'{DATA_ROOT}/text/enwik9', 'corpus': f'{CORPUS_ROOT}/spm_enwik9_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': {'raw': f'{DATA_ROOT}/text/enwik9', 'corpus': f'{CORPUS_ROOT}/spm_enwik9_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
-    'gutenberg': {'mod': 'text', 'train': None, 'test': {'raw': f'{DATA_ROOT}/text/gutenberg', 'corpus': f'{CORPUS_ROOT}/spm_gutenberg_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
+    'enwik8': {
+        'mod': 'text', 
+        'train': {'raw': f'{DATA_ROOT}/text/enwik8', 'corpus': f'{CORPUS_ROOT}/spm_enwik8_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': None
+    },
+    'enwik9': {
+        'mod': 'text', 
+        'train': None, 
+        'test': {'raw': f'{DATA_ROOT}/text/enwik9', 'corpus': f'{CORPUS_ROOT}/spm_enwik9_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
+    'gutenberg': {
+        'mod': 'text', 
+        'train': None, 
+        'test': {'raw': f'{DATA_ROOT}/text/gutenberg', 'corpus': f'{CORPUS_ROOT}/spm_gutenberg_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
 
     # ===== Gene =====
-    'genoseq': {'mod': 'gene', 'train': {'raw': f'{DATA_ROOT}/gene/GenoSeq/GenoSeq-test.fasta', 'corpus': f'{CORPUS_ROOT}/spm_genoseq_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': {'raw': f'{DATA_ROOT}/gene/GenoSeq/GenoSeq-test.fasta', 'corpus': f'{CORPUS_ROOT}/spm_genoseq_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
-    'dnacorpus': {'mod': 'gene', 'train': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
+    'genoseq': {
+        'mod': 'gene', 
+        'train': {'raw': f'{DATA_ROOT}/gene/GenoSeq/GenoSeq-train.fasta', 'corpus': f'{CORPUS_ROOT}/spm_genoseq_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': {'raw': f'{DATA_ROOT}/gene/GenoSeq/GenoSeq-test.fasta', 'corpus': f'{CORPUS_ROOT}/spm_genoseq_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
+    'dnacorpus': {
+        'mod': 'gene', 
+        'train': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
 
     # ===== Database =====
-    'wikisql': {'mod': 'database', 'train': {'raw': f'{DATA_ROOT}/database/WikiSQL/test.sql', 'corpus': f'{CORPUS_ROOT}/spm_wikisql_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': {'raw': f'{DATA_ROOT}/database/WikiSQL/test.sql', 'corpus': f'{CORPUS_ROOT}/spm_wikisql_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
-    'spider': {'mod': 'database', 'train': {'raw': f'{DATA_ROOT}/database/spider/train', 'corpus': f'{CORPUS_ROOT}/spm_spider_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 'test': {'raw': f'{DATA_ROOT}/database/spider/test', 'corpus': f'{CORPUS_ROOT}/spm_spider_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}},
+    'wikisql': {
+        'mod': 'database', 
+        'train': {'raw': f'{DATA_ROOT}/database/WikiSQL/train.sql', 'corpus': f'{CORPUS_ROOT}/spm_wikisql_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': {'raw': f'{DATA_ROOT}/database/WikiSQL/test.sql', 'corpus': f'{CORPUS_ROOT}/spm_wikisql_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
+    'spider': {
+        'mod': 'database', 
+        'train': {'raw': f'{DATA_ROOT}/database/spider/train', 'corpus': f'{CORPUS_ROOT}/spm_spider_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': {'raw': f'{DATA_ROOT}/database/spider/test', 'corpus': f'{CORPUS_ROOT}/spm_spider_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+    },
 
     # ===== Speech =====
-    'librispeech': {'mod': 'speech', 'train': f'{DATA_ROOT}/speech/LibriSpeech/conv2text_uint8/LibriSpeech-test-clean', 'test': f'{DATA_ROOT}/speech/LibriSpeech/conv2text_uint8/LibriSpeech-test-clean'},
+    'librispeech': {
+        'mod': 'speech', 
+        'train': f'{DATA_ROOT}/speech/LibriSpeech/conv2text_uint8/LibriSpeech-train-clean', 
+        'test': f'{DATA_ROOT}/speech/LibriSpeech/conv2text_uint8/LibriSpeech-test-clean'
+    },
 }
 
 

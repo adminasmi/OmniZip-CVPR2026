@@ -10,9 +10,6 @@ from rwkv7_hira_rkmoa_moe import *
 from rwkv7_hira_rvmoa_moe import *
 from rwkv7_hira_rkvmoa_moe import *
 
-from transformer import *
-from mamba import *
-
 from glob import glob
 torch.set_float32_matmul_precision('high')
 
