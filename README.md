@@ -155,18 +155,6 @@ cd aclibs && bash build.sh
 --batch_size 32 --model_size xs
 ```
 
-**Vocabulary Issues**:
-```bash
-# Check modal tokens in vocab
-python -c "
-import json
-with open('vocabs/unk_allow/vocab_spm_bpe_16384_1.0/spm_bpe_16384_1.0.json') as f:
-    vocab = json.load(f)
-for modal in ['<text>', '<image>', '<speech>', '<medical>', '<tactile>', '<gene>', '<database>']:
-    print(f'{modal}: {vocab.get(modal, \"NOT FOUND\")}')
-"
-```
-
 ---
 
 **CVPR 2026 Submission** | **MIT License**
