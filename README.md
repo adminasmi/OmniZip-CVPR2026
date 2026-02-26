@@ -9,11 +9,15 @@ Lossless compression is essential for efficient data storage and transmission. A
 ## 🚀 Quick Start
 
 ### Environment Setup
+
+**Requirements**: Python 3.10.16, PyTorch 2.1.0+cu121 
+> Other enviroment may be suitable as well.
+
 ```bash
 # Install with uv (recommended)
 uv venv
 source .venv/bin/activate
-uv pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu121
+uv pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
 uv pip install cython numpy pillow sentencepiece nibabel prettytable
 uv pip install -e .
 
@@ -118,20 +122,22 @@ python decompress.py \
 
 ## 🧠 Model Architecture
 
-- **MoE**: Mixture of Experts for conditional computation
+All model implementations are available in the `models/` directory, including ablation study variants. 
+
+The main experiments use **Primary Model**: `models/rwkv7_hira_vmoa_moe.py`
+
+- **Base**: RWKV7 architecture with re-parameterization
+- **MoE**: Mixture of Experts for conditional computation  
 - **MoA**: Mixture of Experts for linear attention (apply only on R layer)
 - **Combined**: MoE + MoA for optimal performance
 
-## 📊 Modal Tokens
+**Available Variants**:
+- Base RWKV7 models
+- MoE-only variants
+- MoA-only variants  
+- Re-parameterization variants
+- Ablation study models
 
-Each sequence starts with modality token:
-- `<text>`: Text sequences
-- `<image>`: Image patches  
-- `<speech>`: Speech sequences
-- `<medical>`: Medical data
-- `<tactile>`: Tactile data
-- `<gene>`: Gene sequences
-- `<database>`: Database queries
 
 ## 🔧 Testing
 
