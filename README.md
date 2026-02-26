@@ -25,6 +25,17 @@ uv pip install -e .
 cd aclibs && bash build.sh && cd ..
 ```
 
+```bash
+# Test arithmetic coding
+cd aclibs && ./test.sh
+
+# Verify installation
+python -c "
+from aclibs import arithmetic_coder, bitstreams, frequency_table
+print('✓ All modules working')
+"
+```
+
 ### Tokenization (Required First Step)
 ```bash
 # Generate vocabulary and tokenize datasets (only need for text and speech)
@@ -138,19 +149,14 @@ The main experiments use **Primary Model**: `models/rwkv7_hira_vmoa_moe.py`
 - Re-parameterization variants
 - Ablation study models
 
+## 🍎 CoreML Deployment
 
-## 🔧 Testing
+For deployment on MacBook CPUs and iPhone NPUs, convert the model to CoreML format. See `coreml/` directory for complete conversion scripts.
 
-```bash
-# Test arithmetic coding
-cd aclibs && ./test.sh
+**Notes**:
+- All CUDA operations converted to PyTorch CPU implementations.
+- Model quantization available for mobile deployment.
 
-# Verify installation
-python -c "
-from aclibs import arithmetic_coder, bitstreams, frequency_table
-print('✓ All modules working')
-"
-```
 
 ## 🛠 Troubleshooting
 
