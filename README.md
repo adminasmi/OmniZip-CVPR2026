@@ -28,7 +28,7 @@ python vocabs/getvocab.py
 
 # Available tokenized datasets (we will upload to cloud soon):
 # - Text corpora: enwik8, enwik9
-# - Speech sequences: Byte-encoded audio
+# - Speech sequences: LibriSpeech (Byte-encoded wav)
 # - Gene sequences: genoseq, dnacorpus
 # - Database queries: spider, wikisql
 ```
