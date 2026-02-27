@@ -112,7 +112,7 @@ nohup python compress.py \
 ```bash
 python decompress.py \
     --use_ac \
-    --compressed_file ./experiments/test/[timestamp]/expert_analysis/text_compressed.bin \
+    --compressed_file ./experiments/text_compressed.bin \
     --output_file ./decompressed_output.pt \
     --logits_shape 16 1024 16384 \
     --model_name rwkv7_hira_vmoa_moe --model_size m \
@@ -142,7 +142,7 @@ All model implementations are available in the `models/` directory, including ab
 The main experiments use **Primary Model**: `models/rwkv7_hira_vmoa_moe.py`
 
 - **Base**: RWKV7 architecture with re-parameterization
-- **MoE**: Mixture of Experts for conditional computation  
+- **MoE**: Mixture of Experts for non-linear feedforward  
 - **MoA**: Mixture of Experts for linear attention (apply only on R layer)
 - **Combined**: MoE + MoA for optimal performance
 
