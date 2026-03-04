@@ -62,7 +62,7 @@ nohup python train.py \
     --name image-moa-moe \
     --model_name rwkv7_hira_vmoa_moe --model_size s \
     --num_moe_layers 2 --num_experts 4 \
-    --gpu_ids 6 --batch_size 84 --nepochs 20 --nsteps 20000 \
+    --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
     > ./logs/single-image-moa-moe.log &
 ```
 
@@ -74,7 +74,7 @@ nohup python train.py \
     --name omni-vmoa-moe \
     --model_name rwkv7_hira_vmoa_moe --model_size s \
     --num_moe_layers 3 --num_experts 4 --k 2 --mlp_factor 4 \
-    --gpu_ids 6 --batch_size 84 --nepochs 20 --nsteps 20000 \
+    --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
     > ./logs/omni-vmoa-moe.log &
 ```
 
