@@ -78,6 +78,7 @@ python vocabs/getvocab.py
 ```
 
 Available tokenized datasets (on SJTU cloud): https://pan.sjtu.edu.cn/web/share/3802e03f83307ca61482db9e403384b3
+> place them under `OmniZip-CVPR2026/corpus/unk_allow`.
 
 ```bash
 # Available tokenized datasets:
@@ -110,6 +111,7 @@ There are three model scales:
 Each model file contains code in its `__main__` section to compute complexity and parameter counts.
 
 Checkpoints (on SJTU cloud):  https://pan.sjtu.edu.cn/web/share/727d5e69949a0728914d63d114dfd659
+> place them under `OmniZip-CVPR2026/checkpoints`.
 
 ## 🏋️ Training
 
