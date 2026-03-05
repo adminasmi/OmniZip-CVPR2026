@@ -10,23 +10,41 @@ Lossless compression is essential for efficient data storage and transmission. A
   <img src="teaser.png" alt="Teaser" width="1000">
 </p>
 
+---
+
 ## 🚀 Quick Start
 
-### Environment Setup
+### 1) Environment (uv recommended)
 
-**Requirements**: Python 3.10.16, PyTorch 2.1.0+cu121 
-> Other enviroment may be suitable as well.
+**Requirements**
+- Python **3.10.16**
+- PyTorch **2.1.0 + cu121** (other environments may also work)
 
 ```bash
-# Install with uv (recommended)
+# Create env
 uv venv
 source .venv/bin/activate
-uv pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 --index-url https://download.pytorch.org/whl/cu121
+
+# Install PyTorch (CUDA 12.1)
+uv pip install torch==2.1.0 torchvision==0.16.0 torchaudio==2.1.0 \
+  --index-url https://download.pytorch.org/whl/cu121
+
+# Install dependencies + project
 uv pip install cython numpy pillow sentencepiece nibabel prettytable
 uv pip install -e .
+```
 
-# Compile arithmetic coding modules
+### 2) Compile Arithmetic Coding (AC) modules (aclibs/)
+
+We provide a Cython-based arithmetic coding implementation in aclibs/.
+
+If Cython compilation fails on your machine, please open an Issue with logs and platform info.
+
+```bash
 cd aclibs && bash build.sh && cd ..
+
+# Our AC implementation is based on "https://www.nayuki.io/page/reference-arithmetic-coding", with minor logic modifications and converted to Cython for improved efficiency. 
+# If you encounter any issues during use, you can ask us or refer to their source code for comparison.
 ```
 
 ```bash
@@ -40,118 +58,157 @@ print('✓ All modules working')
 "
 ```
 
-### Tokenization (Required First Step)
-```bash
-# Generate vocabulary and tokenize datasets (only need for text and speech)
-python vocabs/getvocab.py
+## 📦 Datasets 
 
-# Available tokenized datasets (we will upload to cloud soon):
+All dataset processing logic lives in `datasets/`.
+
+Please follow the calling logic in `build.py` to prepare datasets.
+
+## 🔤 Tokenization
+
+OmniZip supports two tokenization modes:
+- Pre-tokenization (recommended for text & speech).
+- On-the-fly tokenization (tokenize inside the data loader at runtime).
+
+In the current repo, the datasets/ logic is designed to work well with pre-tokenized text/speech, so we recommend pre-tokenizing speech and text for best throughput and simpler data loading.
+
+```bash
+# Generate vocabulary / tokenize (for text & speech)
+python vocabs/getvocab.py
+```
+
+Available tokenized datasets (on SJTU cloud): https://pan.sjtu.edu.cn/web/share/3802e03f83307ca61482db9e403384b3
+
+```bash
+# Available tokenized datasets:
 # - Text corpora: enwik8, enwik9
 # - Speech sequences: LibriSpeech (Byte-encoded wav)
 # - Gene sequences: genoseq, dnacorpus
 # - Database queries: spider, wikisql
 ```
 
+## 🧠 Models
+
+All models (including ablations) are in `models/`.
+
+Please follow the calling logic in `build.py` to prepare models.
+
+> Naming note: To clearly distinguish two routing designs in the implementation.
+> - MoE refers to routing in feedforward
+> - MoA refers to routing in context learning
+
+Primary model (main experiments): `models/rwkv7_hira_vmoa_moe.py`.
+
+There are three model scales:
+
+|--model_size|Params|
+|-----------|---------|
+|s|	4.8M|
+|m|	38M|
+|l|	152M|
+
+Each model file contains code in its `__main__` section to compute complexity and parameter counts.
+
+Checkpoints (on SJTU cloud):  https://pan.sjtu.edu.cn/web/share/727d5e69949a0728914d63d114dfd659
+
 ## 🏋️ Training
 
-### Single Modalilty
+Training entry points: `train.py` and `Trainer.py`.
+
+You can train OmniZip as:
+- a single-modality compressor (routing/tokenizer will effectively reduce to single-modality behavior), by selecting modalities by passing one or multiple flags:
+`--text | --image | --speech | --medical | --tactile | --gene | --database`.
+- a unified multi-modal compressor, by directly setting `--unify`.
+
+**Example A: single-modality (image), model size `s`**
 ```bash
 nohup python train.py \
-    --image --moe --moa --amp --accupdate \
-    --pretrain_model ./checkpoints/rwkv7_hira_vmoa_moe_s.pth \
-    --name image-moa-moe \
-    --model_name rwkv7_hira_vmoa_moe --model_size s \
-    --num_moe_layers 2 --num_experts 4 \
-    --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
-    > ./logs/single-image-moa-moe.log &
+  --image --moe --moa --amp --accupdate \
+  --pretrain_model ./checkpoints/rwkv7_hira_s.pth \
+  --name image-moa-moe \
+  --model_name rwkv7_hira --model_size s \
+  --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
+  > ./logs/image-s.log &
 ```
 
-### Multi-Modal Unified
+**Example B: unified (all modalities), model size `l`**
 ```bash
 nohup python train.py \
-    --unify --moe --moa --amp --accupdate \
-    --pretrain_model ./checkpoints/rwkv7_hira_vmoa_moe_s.pth \
-    --name omni-vmoa-moe \
-    --model_name rwkv7_hira_vmoa_moe --model_size s \
-    --num_moe_layers 3 --num_experts 4 --k 2 --mlp_factor 4 \
-    --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
-    > ./logs/omni-vmoa-moe.log &
+  --unify --moe --moa --amp --accupdate \
+  --pretrain_model ./checkpoints/rwkv7_hira_vmoa_moe_l.pth \
+  --name omni-vmoa-moe \
+  --model_name rwkv7_hira_vmoa_moe --model_size l \
+  --num_moe_layers 3 --num_moa_layers 3 \
+  --num_experts 4 --k 2 --mlp_factor 4 \
+  --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
+  > ./logs/omni-vmoa-moe-l.log &
 ```
 
-**Modalities**: `--text | --image | --speech | --medical | --tactile | --gene | --database | --unify`
-> ``--unify`` means multi-modal unified lossless compression
+**Key training parameters:**
+- `--moa`: enable context learning routing (MoA)
+- `--moe`: enable feedforward routing (MoE)
+- `--amp`: mixed precision training
+- `--accupdate`: gradient accumulation
+- `--num_moe_layers`: number of blocks using feedforward MoE
+- `--num_moa_layers`: number of blocks using context learning MoA
+- `--num_experts`: number of experts per routing module
+- `--k`: top-k experts
+- `--mlp_factor`: 2× the hidden expansion factor inside each feedforward MoE expert
+- `--nepochs`: number of epochs
+- `--nsteps`: force number of steps per epoch
+
+> Note: the `l` scale model has 3 blocks, so set --num_moe_layers and --num_moa_layers to 3.
+
+**You can use `--debug` for a quick sanity check.**
+ 
 
 ## 🗜️ Compression
 
-### Single Modality
+Compression entry points: `compress.py` and `Evaler.py`.
+
+The overall logic is consistent with train.py and shares the same modality flags and routing parameters.
+
+**Example A: single-modality compression (image), model size `m`**
 ```bash
 nohup python compress.py \
-    --image --moe --moa \
-    --pretrain_model ./checkpoints/omnicomp-moa-moe/m/rwkv7_hira_vmoa_moe_m.pth \
-    --name test-image \
-    --model_name rwkv7_hira_vmoa_moe --model_size m \
-    --num_moe_layers 2 --num_experts 4 \
-    --gpu_ids 6 --batch_size 96 \
-    > ./logs/test/image-compression.log &
+  --image --moe --moa \
+  --pretrain_model ./checkpoints/rwkv7_hira_m.pth \
+  --name test-image \
+  --model_name rwkv7_hira --model_size m \
+  --gpu_ids 6 --batch_size 96 \
+  > ./logs/test/image-compression.log &
 ```
 
-### Multi-Modal
+**Example B: unified compression (all modalities), model size `l`**
 ```bash
 nohup python compress.py \
-    --unify --moe --moa \
-    --pretrain_model ./checkpoints/omnicomp-moa-moe/m/rwkv7_hira_vmoa_moe_m.pth \
-    --name test-omni \
-    --model_name rwkv7_hira_vmoa_moe --model_size m \
-    --num_moe_layers 2 --num_experts 4 \
-    --gpu_ids 6 --batch_size 96 \
-    > ./logs/test/omni-compression.log &
+  --unify --moe --moa \
+  --pretrain_model ./checkpoints/rwkv7_hira_vmoa_moe_l.pth \
+  --name test-omni \
+  --model_name rwkv7_hira_vmoa_moe --model_size l \
+  --num_moe_layers 3 --num_moa_layers 3 --num_experts 4 \
+  --gpu_ids 6 --batch_size 96 \
+  > ./logs/test/omni-compression.log &
 ```
+
+**Arithmetic coding vs cross-entropy bitrate**
+- Enable arithmetic coding: `--use_ac`
+- Otherwise, the script estimates bitrate via cross-entropy
 
 ## 📂 Decompression
 
+Decompression entry point: `decompress.py`
+
 ```bash
-python decompress.py \
-    --use_ac \
-    --compressed_file ./experiments/text_compressed.bin \
-    --output_file ./decompressed_output.pt \
-    --logits_shape 16 1024 16384 \
-    --model_name rwkv7_hira_vmoa_moe --model_size m \
-    --num_moe_layers 2 --num_experts 4 \
-    --gpu_ids 6
+nohup python decompress.py \
+  --use_ac \
+  --compressed_file ./experiments/text_compressed.bin \
+  --output_file ./decompressed_output.pt \
+  --logits_shape 16 1024 16384 \
+  --model_name rwkv7_hira_vmoa_moe --model_size m \
+  --num_moe_layers 2 --num_experts 4 \
+  --gpu_ids 6
 ```
-
-## ⚙️ Key Parameters
-
-| Parameter | Values | Description |
-|-----------|---------|-------------|
-| `--model_size` | s/m/l | Model scale (4.8M-96M params) |
-| `--num_moe_layers` | <=num_layers | MoE layers count |
-| `--num_experts` | >=2 | Experts per MoE layer |
-| `--k` | >=1 | Active experts |
-| `--batch_size` | - | Training batch size |
-| `--hira_factor` | 2-8 | Re-parameterization rank |
-| `--use_ac` | flag | Use arithmetic coding vs cross-entropy |
-| `--amp` | flag | Mixed precision training |
-| `--accupdate` | flag | Gradient accumulation |
-| `--debug` | flag | Debug mode for quick checking |
-
-## 🧠 Model Architecture
-
-All model implementations are available in the `models/` directory, including ablation study variants. 
-
-The main experiments use **Primary Model**: `models/rwkv7_hira_vmoa_moe.py`
-
-- **Base**: RWKV7 architecture with re-parameterization
-- **MoE**: Mixture of Experts for non-linear feedforward  
-- **MoA**: Mixture of Experts for linear attention (apply only on R layer)
-- **Combined**: MoE + MoA for optimal performance
-
-**Available Variants**:
-- Base RWKV7 models
-- MoE-only variants
-- MoA-only variants  
-- Re-parameterization variants
-- Ablation study models
 
 ## 🍎 CoreML Deployment
 
@@ -177,4 +234,11 @@ cd aclibs && bash build.sh
 
 ---
 
-**CVPR 2026 Reference** | 
+## Reference
+
+@article{zhao2026omnizip,
+  title={OmniZip: Learning a Unified and Lightweight Lossless Compressor for Multi-Modal Data},
+  author={Zhao, Yan and Cheng, Zhengxue and Zhang, Junxuan and Zhou, Dajiang and Gu, Qunshan and Wang, Qi and Song, Li},
+  journal={arXiv preprint arXiv:2602.22286},
+  year={2026}
+}
