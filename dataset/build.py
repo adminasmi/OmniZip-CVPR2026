@@ -139,10 +139,10 @@ TYPE_TO_BUILD_FUNC = {
 }
 
 TASKS_TRAIN = {
-    'image':     ['div2k', 'kodak', 'clic-pro', 'clic-mobile'],
+    'image':     ['div2k', 'clic-pro', 'clic-mobile'],
     'medical':   ['axial', 'coronal', 'sagittal'],
     'tactile':   ['objectfolder', 'touchandgo'],
-    'text':      ['enwik9', 'gutenberg'],
+    'text':      ['enwik8', 'gutenberg'],
     'speech':    ['librispeech'],
     'gene':      ['genoseq', 'dnacorpus'],
     'database':  ['spider', 'wikisql'],
