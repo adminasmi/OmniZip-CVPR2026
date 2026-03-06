@@ -243,12 +243,22 @@ cd aclibs && bash build.sh
 
 This work was partly supported by the NSFC (62431015, 62571317, 62501387), the Fundamental Research Funds for the Central Universities, Shanghai Key Laboratory of Digital Media Processing and Transmission under Grant 22DZ2229005, 111 project BP0719010 and the Okawa Research Fund, the Ant Group Research Fund.
 
-## Reference
+This project is based on some excellent works, including but not limited to:
+- **[RWKV-LM](https://github.com/BlinkDL/RWKV-LM)**: For the lightweight backbone architecture.
+- **[Nayuki](https://www.nayuki.io/page/reference-arithmetic-coding)**: For the reference arithmetic coding implementation.
+- **[L3TC](https://github.com/alipay/L3TC-leveraging-rwkv-for-learned-lossless-low-complexity-text-compression)**: For insights and inspiration in learned lossless compression.
 
+We sincerely thank all the contributors for their valuable work and open-source contributions!
+
+
+
+## Citation
+```bibtex
 @article{zhao2026omnizip,
   title={OmniZip: Learning a Unified and Lightweight Lossless Compressor for Multi-Modal Data},
   author={Zhao, Yan and Cheng, Zhengxue and Zhang, Junxuan and Zhou, Dajiang and Gu, Qunshan and Wang, Qi and Song, Li},
   journal={arXiv preprint arXiv:2602.22286},
   year={2026}
 }
+```
 
