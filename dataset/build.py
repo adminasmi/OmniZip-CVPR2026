@@ -91,7 +91,7 @@ DATASETS = {
     },
     'gutenberg': {
         'mod': 'text', 
-        'train': None, 
+        'train': {'raw': f'{DATA_ROOT}/text/gutenberg_train', 'corpus': f'{CORPUS_ROOT}/spm_gutenberg_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
         'test': {'raw': f'{DATA_ROOT}/text/gutenberg', 'corpus': f'{CORPUS_ROOT}/spm_gutenberg_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
     },
 
