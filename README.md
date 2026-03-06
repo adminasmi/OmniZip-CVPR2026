@@ -118,7 +118,7 @@ Checkpoints (on SJTU cloud):  https://pan.sjtu.edu.cn/web/share/727d5e69949a0728
 Training entry points: `train.py` and `Trainer.py`.
 
 You can train OmniZip as:
-- a single-modality compressor (routing/tokenizer will effectively reduce to single-modality behavior), by selecting modalities by passing one or multiple flags:
+- a single-modality compressor (routing/tokenizer will effectively reduce to single-modality behavior), by selecting one or multiple modality flags:
 `--text | --image | --speech | --medical | --tactile | --gene | --database`.
 - a unified multi-modal compressor, by directly setting `--unify`.
 
