@@ -88,6 +88,8 @@ Available tokenized datasets (on SJTU cloud): https://pan.sjtu.edu.cn/web/share/
 # - Database queries: spider, wikisql
 ```
 
+Raw datasets will also be uploaded to https://pan.sjtu.edu.cn/web/share/cafcebc5a891449d32fcbbf5056bc2d7 successively.
+
 ## 🧠 Models
 
 All models (including ablations) are in `models/`.
