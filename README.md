@@ -196,6 +196,8 @@ nohup python compress.py \
   > ./logs/test/omni-compression.log &
 ```
 
+**Note: Even if you have trained a unified-modality compressor, you can also check its performance on single-modality or some selected-modalities by setting the corresponding modality flag (e.g., `--image` for image-only compression).**
+
 **Arithmetic coding vs cross-entropy bitrate**
 - Enable arithmetic coding: `--use_ac`
 - Otherwise, the script estimates bitrate via cross-entropy
