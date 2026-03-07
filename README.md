@@ -88,7 +88,7 @@ Available tokenized datasets: https://pan.sjtu.edu.cn/web/share/3802e03f83307ca6
 # - Database queries: spider, wikisql
 ```
 
-Raw datasets will also be uploaded to https://pan.sjtu.edu.cn/web/share/cafcebc5a891449d32fcbbf5056bc2d7 successively.
+Raw datasets are available in: https://pan.sjtu.edu.cn/web/share/cafcebc5a891449d32fcbbf5056bc2d7
 
 ## 🧠 Models
 
