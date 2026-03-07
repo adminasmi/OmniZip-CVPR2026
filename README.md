@@ -248,7 +248,7 @@ This work was partly supported by the NSFC (62431015, 62571317, 62501387), the F
 This project is based on some excellent works, including but not limited to:
 - **[RWKV-LM](https://github.com/BlinkDL/RWKV-LM)**: For the lightweight backbone architecture.
 - **[Nayuki](https://www.nayuki.io/page/reference-arithmetic-coding)**: For the reference arithmetic coding implementation.
-- **[L3TC](https://github.com/alipay/L3TC-leveraging-rwkv-for-learned-lossless-low-complexity-text-compression)**: For insights and inspiration in learned lossless compression.
+- **[L3TC](https://github.com/alipay/L3TC-leveraging-rwkv-for-learned-lossless-low-complexity-text-compression)** and **[LMIC](https://github.com/google-deepmind/language_modeling_is_compression)**: For insights and inspiration in learned lossless compression.
 
 We sincerely thank all the contributors for their valuable work and open-source contributions!
 
