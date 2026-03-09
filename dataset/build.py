@@ -103,8 +103,8 @@ DATASETS = {
     },
     'dnacorpus': {
         'mod': 'gene', 
-        'train': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
-        'test': {'raw': f'{DATA_ROOT}/gene/DNACorpus', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
+        'train': {'raw': f'{DATA_ROOT}/gene/DNACorpus/gene_dnacorpus_train.txt', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_train_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}, 
+        'test': {'raw': f'{DATA_ROOT}/gene/DNACorpus/gene_dnacorpus_test.txt', 'corpus': f'{CORPUS_ROOT}/spm_dnacorpus_test_bpe_{VOCAB_SIZE}_{COVERAGE}.txt'}
     },
 
     # ===== Database =====
