@@ -340,7 +340,11 @@ class Trainer:
                 kwargs[name] = getattr(args, name)
         
         if sched_name == 'cosine_annealing' and 'T_0' not in kwargs:
-            kwargs['T_0'] = len(self.dataloader_train)
+            import math
+            steps_per_epoch = min(len(self.dataloader_train), args.nsteps)
+            update_every = 2 if args.accupdate else 1
+            updates_per_epoch = max(1, math.ceil(steps_per_epoch / update_every))
+            kwargs['T_0'] = updates_per_epoch
         self.scheduler = sched_cls(self.optimizer, **kwargs)
 
 
