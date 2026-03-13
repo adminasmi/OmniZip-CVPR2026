@@ -162,7 +162,8 @@ nohup python train.py \
 - `--k`: top-k experts
 - `--mlp_factor`: 2× the hidden expansion factor inside each feedforward MoE expert
 - `--nepochs`: number of epochs
-- `--nsteps`: force number of steps per epoch
+- `--nsteps`: force number of steps per epoch (not recommended, better to traverse all)
+- `--resume`: resume training from the checkpoint (load scheduler and optimizer status)
 
 > Note: the `l` scale model has 3 blocks, so set --num_moe_layers and --num_moa_layers to 3.
 
