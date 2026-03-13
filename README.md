@@ -134,7 +134,7 @@ nohup python train.py \
   --pretrain_model ./checkpoints/rwkv7_hira_s.pth \
   --name image-moa-moe \
   --model_name rwkv7_hira --model_size s \
-  --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
+  --gpu_ids 6 --batch_size 84 --nepochs 20 --nsteps 50000 \
   > ./logs/image-s.log &
 ```
 
@@ -147,7 +147,7 @@ nohup python train.py \
   --model_name rwkv7_hira_vmoa_moe --model_size l \
   --num_moe_layers 3 --num_moa_layers 3 \
   --num_experts 4 --k 2 --mlp_factor 4 \
-  --gpu_ids 6 --batch_size 64 --nepochs 20 --nsteps 20000 \
+  --gpu_ids 6 --batch_size 84 --nepochs 20 --nsteps 50000 \
   > ./logs/omni-vmoa-moe-l.log &
 ```
 
