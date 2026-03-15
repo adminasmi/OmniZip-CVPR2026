@@ -1,4 +1,5 @@
 import torch
+from rwkv7_hira import *
 from rwkv7_hira_moe import *
 from rwkv7_hira_moa import *
 
