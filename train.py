@@ -53,7 +53,7 @@ def parse_args():
     parser.add_argument('--pretrain_model', help='load from other checkpoint', default=None)
     parser.add_argument('--resume',  action='store_true')
     parser.add_argument('--nepochs', type=int, default=20)
-    parser.add_argument('--nsteps',  type=int, default=20000, help='max number of iterations in each epoch.')
+    parser.add_argument('--nsteps',  type=int, default=50000, help='max number of iterations in each epoch.')
     parser.add_argument('--batch_size', type=int, default=16)
     parser.add_argument('--save_interval', type=int, default=10000)
     
