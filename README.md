@@ -130,11 +130,11 @@ You can train OmniZip as:
 **Example A: single-modality (image), model size `s`**
 ```bash
 nohup python train.py \
-  --image --moe --moa --amp --accupdate \
+  --image --amp --accupdate \
   --pretrain_model ./checkpoints/rwkv7_hira_s.pth \
   --name image-moa-moe \
   --model_name rwkv7_hira --model_size s \
-  --gpu_ids 6 --batch_size 84 --nepochs 20 --nsteps 50000 \
+  --gpu_ids 6 --batch_size 84 --nepochs 20 \
   > ./logs/image-s.log &
 ```
 
