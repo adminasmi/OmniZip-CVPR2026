@@ -20,7 +20,7 @@ RWKV_MODEL_CONFIGS = {
         'm':   dict(n_embd=912, n_layer=2),     # 38.0m
         'l':   dict(n_embd=1488, n_layer=3),    # 152.0m
         # 'xl':  dict(n_embd=1184, n_layer=3),
-        # 'xxl': dict(n_embd=1456, n_layer=4)
+        'xl': dict(n_embd=1456, n_layer=4)
     }
 
 MAMBA_MODEL_CONFIGS = {

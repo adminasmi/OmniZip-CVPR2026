@@ -113,10 +113,10 @@ if __name__ == '__main__':
     @dataclass
     class ARGS:
         vocab_size : int = 16384
-        n_layer : int = 2
+        n_layer : int = 3
         hira_factor : int = 4
         # n_head : int = 16    # head dim 128 suggested by @Grad62304977
-        n_embd : int = 96
+        n_embd : int = 1488
     args = ARGS()
     print(args)
     
