@@ -30,7 +30,7 @@ def get_size(path):
     else:
         raise FileNotFoundError(f"Path not found: {path}")
 
-AUGMENT = 100
+AUGMENT = 500
 class TextBaseDataset(Dataset, ABC):
     def __init__(
         self, args, word2id_dict, mode='train', logger=None
