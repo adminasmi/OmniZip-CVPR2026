@@ -179,9 +179,9 @@ The overall logic is consistent with train.py and shares the same modality flags
 **Example A: single-modality compression (image), model size `m`**
 ```bash
 nohup python compress.py \
-  --image --moe --moa \
+  --image \
   --pretrain_model ./checkpoints/rwkv7_hira_m.pth \
-  --name test-image \
+  --name test-image-only \
   --model_name rwkv7_hira --model_size m \
   --gpu_ids 6 --batch_size 96 \
   > ./logs/test/image-compression.log &
