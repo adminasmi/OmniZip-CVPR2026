@@ -132,7 +132,7 @@ You can train OmniZip as:
 nohup python train.py \
   --image --amp --accupdate \
   --pretrain_model ./checkpoints/rwkv7_hira_s.pth \
-  --name image-moa-moe \
+  --name image-only \
   --model_name rwkv7_hira --model_size s \
   --gpu_ids 6 --batch_size 84 --nepochs 20 \
   > ./logs/image-s.log &
@@ -160,7 +160,7 @@ nohup python train.py \
 - `--num_moa_layers`: number of blocks using context learning MoA
 - `--num_experts`: number of experts per routing module
 - `--k`: top-k experts
-- `--mlp_factor`: 2× the hidden expansion factor inside each feedforward MoE expert
+- `--mlp_factor`: **2×** the hidden expansion factor inside each feedforward MoE expert
 - `--nepochs`: number of epochs
 - `--nsteps`: force number of steps per epoch (not recommended, better to traverse all)
 - `--resume`: resume training from the checkpoint (load scheduler and optimizer status)
